@@ -21,21 +21,22 @@ rlsync = require('readline-sync')
 // returns the input as a stringwhen the user presses the return
 firstNum = rlsync.question('What\'s the first number? ')
 secondNum = rlsync.question('What\'s the second number? ')
-console.log(firstNum, secondNum)
 // time to ask for operation input
 operator = rlsync.question('What operation would you like to perform? \n1) Add 2) Subtract 3) Multiply 4) Divide ')
 // now begin function
 switch(operator){
   case "1":
-    console.log('Result: ' + firstNum+secondNum);
+    console.log('Result: ' + (parseInt(firstNum)+parseInt(secondNum)));
     break;
   case "2":
-    console.log('Result: ' + firstNum-secondNum)
+    console.log('Result: ' + (parseInt(firstNum)-parseInt(secondNum)))
     break;
   case "3":
-    console.log('Result: ' + firstNum*secondNum)
+    console.log('Result: ' + (parseInt(firstNum)*parseInt(secondNum)))
     break;
   case "4":
-    console.log('Result: ' + firstNum/secondNum)
+    console.log('Result: ' + (parseInt(firstNum)/parseInt(secondNum)))
     break
 }
+// rlsync.question always returns a string, that's why we compare to '1'
+// always use '===' because == can coerce one or both values to a different value type

@@ -6,7 +6,7 @@ use spaces let sum = x + 5
 
 if(num<10) //same as saying if((num<10)===true)
 
-1.0 - From Notes
+############################1.0 - From Notes################################
 let name
 if(name = getNameFromUser()){
   console.log(`hi ${name}`)
@@ -29,4 +29,38 @@ if (name===''){
 }else{
   console.log(`hello ${name}`)
 }
+################################2.0 From Notes################################
+Formal PseudoCode:
+START
+
+SET iterator = 1
+SET savedNumber = value within numbers collection at space 1
+# given a collection of integers called 'numbers'
+
+WHILE iterator <= length of numbers
+  SET currentNumber = value within numbers collection at space "iterator"
+  IF currentNumber > savedNumber
+    savedNumber = currentNumber
+  ELSE
+    skip to the next iteration
+
+  iterator += 1
+
+PRINT savedNumber
+END
+
+// PseudoCode exercises
+// 1) write a function that returns the sum of two numbers
+
+// SET variable = randomNumber1
+// SET var2 = randomNumber2
+// PRINT var1 + var2
+
+// 2) a function that takes an array of strings and returns a string that is all those
+//    strings concatenated together
+
+// SET var = arrayofStrings
+// SET varString = ''
+// WHILE arrayofStrings[i] < arrayofStrings.length:
+//   varString += arrayofStrings[i]
 
