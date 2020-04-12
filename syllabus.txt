@@ -1,0 +1,27 @@
+Major topics:
+Using Node.js
+JavaScript Language and syntax
+when to use certain data types
+using pseudo-code and flowcharts for problem decomposition and analysis
+use a static code analyzer
+learn to debug small programs
+understand scope
+understand function arguments
+how to iterate over strings and arrays
+
+Detailed Syllabus:
+JavaScript style
+build a calculator
+think with pseudo-code
+use flow charts to map out logical sequence
+use ESLint to enforce styles
+Refactoring our calculator programs
+Debuging
+Extra features for the calculator program
+Explicit and implicit type coercion
+How to write better code
+Build a mortgage calculator
+Variable scope
+Objects vs primitive values
+Build a Rock-Paper Scissors Game
+RPS game bonus features

@@ -1,0 +1,32 @@
+use camelCase for variable and function names
+constructor functions use PascalCase
+use uppercase names with underscores to represent const values
+put a space after function name and {
+use spaces let sum = x + 5
+
+if(num<10) //same as saying if((num<10)===true)
+
+1.0 - From Notes
+let name
+if(name = getNameFromUser()){
+  console.log(`hi ${name}`)
+} else{
+  console.log('you must enter a name')
+}
+above code is frowned upong because it looks like it could be a mistake
+below is accepted:
+
+let name = getNameFromUser()
+if(name){
+  console.log(`hello ${name}`)
+} else{
+  console.log('enter your name!')
+}
+or even better, make it clear you're testing for a name:
+let name = getNameFromUser()
+if (name===''){
+  console.log("you must enter your name!")
+}else{
+  console.log(`hello ${name}`)
+}
+
