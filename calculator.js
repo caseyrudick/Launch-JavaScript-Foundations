@@ -40,3 +40,6 @@ switch(operator){
 }
 // rlsync.question always returns a string, that's why we compare to '1'
 // always use '===' because == can coerce one or both values to a different value type
+
+//i'm starting to figure it out!!!!
+///lets' see if this is different
