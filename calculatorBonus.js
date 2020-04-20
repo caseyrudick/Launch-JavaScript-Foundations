@@ -1,11 +1,13 @@
+const MESSAGES = require('./calculator_messages.json');
 let rlsync = require('readline-sync');
 
 function prompt(message) {
   console.log(`${message}`);
 }
 
-prompt("Welcome to the Calculator!");
-getNumbers();
+prompt(MESSAGES["welcome"]);
+
+
 function getNumbers() {
   let newArray = [];
   newArray[0] = rlsync.question(prompt("Enter a number: "));
@@ -60,7 +62,6 @@ function playAgain() {
 + ' calculation? \n1)Yes or 2)No ')));
   if (newCalcAns === 1) {
     prompt("Welcome to the Calculator!");
-    getNumbers();
     getOperatorAndResult();
     return true;
   } else {
