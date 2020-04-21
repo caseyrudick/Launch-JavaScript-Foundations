@@ -4,9 +4,23 @@ function prompt(message) {
   console.log(`${message}`);
 }
 
+let result;
+function checkWinner(human, computer) {
+  if (human === computer) {
+    result = 'It\'s a tie!';
+  } else if (human === 1 && computer === 3) {
+    result = 'You win!';
+  } else if (human === 2 && computer === 1) {
+    result = 'You win!';
+  } else {
+    result = 'Computer wins!'
+  }
+  return result;
+}
+
 prompt('Let\'s play rock paper scissors!');
 while (true) {
-    let firstChoice = RLSYNC.question(prompt('Rock paper scissors.....'
+  let firstChoice = RLSYNC.question(prompt('Rock paper scissors.....'
   + 'Shoot! '));
   firstChoice.toLowerCase();
   while (!['rock','paper','scissors'].includes(firstChoice)) {
@@ -25,8 +39,7 @@ while (true) {
       stringConvertedToNum = 3;
       break;
   }
-  let firstComputerChoice = Math.floor((Math.random() * 3) + 1);
-  console.log('ComputerChoice:' + firstComputerChoice);
+  let firstComputerChoice = Math.floor((Math.random() * 3)+1);
   let computerChoiceConvertertoStr;
   switch (firstComputerChoice) {
     case 1:
@@ -39,22 +52,8 @@ while (true) {
       computerChoiceConvertertoStr = 'scissors';
       break;
   }
-  console.log(`The computer chose: ${computerChoiceConvertertoStr}`);
-
-
-  let result;
-  function checkWinner(human, computer) {
-    if (human === computer) {
-      result = 'It\'s a tie!';
-    } else if (human === 1 && computer === 3) {
-      result = 'You win!';
-    } else if (human === 2 && computer === 1) {
-      result = 'You win!';
-    } else {
-      result = 'Computer wins!'
-    }
-    return result;
-  }
+  console.log(`You chose: ${firstChoice.toUpperCase()} and the computer ` +
+  `chose: ${computerChoiceConvertertoStr.toUpperCase()}`);
 
   console.log(checkWinner(stringConvertedToNum,firstComputerChoice));
 
