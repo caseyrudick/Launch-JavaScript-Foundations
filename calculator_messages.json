@@ -1,0 +1,19 @@
+
+ {
+   "en": {
+  "welcome": "Welcome to the calculator!",
+  "validName": "Make sure to enter a valid name.",
+  "validNum": "Hmm that doesn't seem like a number",
+  "tryAgain": "Try again: ",
+  "enterNum1": "Enter a number: ",
+  "enterNum2": "Enter another number: "
+},
+  "es": {
+ "welcome": "Beinvenido a la calculadora! Entre su nombre: ",
+ "validName": "Asegurere de entrar un nombre valido.",
+ "validNum": "Hmm eso no parece un número",
+ "tryAgain": "Inténtalo de nuevo: ",
+ "enterNum1": "Entre un numero",
+ "enterNum2": "Entre otra numero: "
+  }
+}

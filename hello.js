@@ -1,52 +1,44 @@
 const MESSAGES = require('./calculator_messages.json');
-const LANGUAGE = 'en';
 let rlsync = require('readline-sync');
 
 function prompt(message) {
   console.log(`${message}`);
 }
 
-prompt(MESSAGES[LANGUAGE]["welcome"]);
-let lang = rlsync.question(prompt('What Language do you want?' +
-'1) English 2) Spanish: '));
+prompt(MESSAGES["welcome"]);
 
-// function selectLanguageFunction() {
-let val1;
-if (lang === "1") {
-  val1 = 'en';
-} else if (lang === "2") {
-  val1 = 'es';
-} else {
-  val1 = 'Something went wrong!';
+let lang = rlsync.question(prompt('What Language do you want?'));
+
+function selectLanguageFunction() {
+  if (lang === "1") {
+    return 'en';
+  } else if (lang === "2") {
+    return 'es';
+  } else {
+    return undefined;
+  }
 }
-//  return val1;
-//}
 
-// selectLanguageFunction(lang);
-// console.log(selectLanguageFunction(lang));
-getOperatorAndResult();
-
+console.log(selectLanguageFunction(lang));
 
 function getNumbers() {
-//  let val = selectLanguageFunction();
   let newArray = [];
-  newArray[0] = rlsync.question(prompt(MESSAGES[val1]['enterNum1']));
+  newArray[0] = rlsync.question(prompt("Enter a number: "));
   while (invalidNumber(newArray[0])) {
-    prompt(MESSAGES[val1]['validNum']);
-    newArray[0] = rlsync.question(prompt(MESSAGES[val1]['tryAgain']));
+    prompt("Hmm that doesn't seem like a number");
+    newArray[0] = rlsync.question(prompt("Try again: "));
   }
-  newArray[1] = rlsync.question(prompt(MESSAGES[val1]['enterNum2']));
+  newArray[1] = rlsync.question(prompt("Enter another number: "));
   while (invalidNumber(newArray[1])) {
-    prompt(MESSAGES[val1]["enterNum2"]);
-    newArray[1] = rlsync.question(MESSAGES[val1]['tryAgain']);
+    prompt("Hmm that doesn't seem like a number");
+    newArray[1] = rlsync.question(prompt("Try again: "));
   }
   function invalidNumber(num) {
     return num.trimStart() === "" || Number.isNaN(Number(num));
   }
   return newArray;
 }
-
-
+getOperatorAndResult();
 function getOperatorAndResult() {
   let numsArray = getNumbers();
   let operator = rlsync.question(prompt("Select the following " +
@@ -77,7 +69,6 @@ function getOperatorAndResult() {
   }
   console.log(`${numsArray[0]} ${ops} ${numsArray[1]} equals ${result}`);
 }
-
 
 function playAgain() {
   let newCalcAns = Number(rlsync.question(prompt('Do you want to try another'
