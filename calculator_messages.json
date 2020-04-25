@@ -13,7 +13,7 @@
  "validName": "Asegurere de entrar un nombre valido.",
  "validNum": "Hmm eso no parece un número",
  "tryAgain": "Inténtalo de nuevo: ",
- "enterNum1": "Entre un numero",
+ "enterNum1": "Entre un numero: ",
  "enterNum2": "Entre otra numero: "
   }
 }
