@@ -1,13 +1,13 @@
 const RLSYNC = require('readline-sync');
-const WINS =  {ROCK: ['scissors', 'lizard'],
-  PAPER: ['rock', 'Spock'],
-  SCISSORS: ['paper', 'lizard'],
-  LIZARD: ['Spock', 'paper'],
-  SPOCK: ['scissors', 'rock']
+const WINS =  {ROCK: ['SCISSORS', 'LIZARD'],
+  PAPER: ['ROCK', 'SPOCK'],
+  SCISSORS: ['PAPER', 'LIZARD'],
+  LIZARD: ['SPOCK', 'PAPER'],
+  SPOCK: ['SCISSORS', 'ROCK']
 };
 const validHumanShots = ['r','p','s','sp','l'];
 const possibleShots = ['ROCK','PAPER','SCISSORS','SPOCK','LIZARD'];
-
+let score = {human: 0, computer: 0, total: 0, games: 0};
 
 function prompt(message) {
   console.log(`${message}`);
@@ -16,113 +16,156 @@ function getValueFromPrompt (value) {
   return RLSYNC.question(prompt(`${value}`));
 }
 
-prompt('=>Welcome to Rock, Paper, Scissors, Spock, Lizard\n');
-prompt('\nHere are the rules:  \nEnter "r" for rock, \n"p" for paper,' +
+prompt('\n=>Welcome to Rock, Paper, Scissors, Spock, Lizard\n');
+prompt('\n=>Here are the rules:  \nEnter "r" for rock, \n"p" for paper,' +
 '\n"s" for scissors, \n"sp" for spock, \n"l" for lizard.\n');
 
-
 function howManyGamesToPlay() {
-  let maxNumberOfGames = getValueFromPrompt(`=>Please enter the number of ` +
-  `games you'd like to play: `);
-  return maxNumberOfGames;
+  score.games = Number(getValueFromPrompt(`=>Please enter the number of ` +
+  `games you'd like to play (Select a number between 1 & 10): `));
+  while (![1,2,3,4,5,6,7,8,9,10].includes(score.games)) {
+    score.games = Number(getValueFromPrompt(`\n=>Hmm that didn't register.  Please enter 1-10: `));
+  }
+  return score;
 }
 
-//get human shot and verify
-function getHumanShot() {
-  let getHumanAnswer = RLSYNC.question(prompt(('Readyyy, Rock, Paper,' +
-  'Scissors, Spock, Lizard...Shoot!')));
-  console.log(getHumanAnswer);
-  while (!validHumanShots.includes(getHumanAnswer)) {
-    getHumanAnswer = RLSYNC.question(prompt('Hmm something is off' +
-        '. Please try again: '));
+function doYouWantToPlayAgain() {
+  let playAgain = getValueFromPrompt(`\n=>Do you want to play again?`);
+  while (!['y','Y','n','N'].includes(playAgain)) {
+    playAgain = getValueFromPrompt(`\n=>Hmm that didn't register.  Please enter y/n: `);
   }
-  let expandedVerifiedHumanShot = convertHumanShotToFullString(getHumanAnswer);
-  return expandedVerifiedHumanShot;
+  if (playAgain === 'y') {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function verifyHumanShot() {
+  let result = getValueFromPrompt('Readyyy, Rock, Paper,' +
+  ' Scissors, Spock, Lizard...Shoot!');
+  while (!validHumanShots.includes(result)) {
+    result = getValueFromPrompt('Hmm response didn\'t work. ' +
+      'Please shoot again, choosing either "r", "p", "s", "sp", "or" "l": ');
+  }
+  return convertHumanShotToFullString(result);
 }
 
 function convertHumanShotToFullString(convert) {
-  let result;
+  let fullStringResult;
   switch (convert) {
     case 'r':
-      result = "ROCK";
+      fullStringResult = "ROCK";
       break;
     case 'p':
-      result = 'PAPER'
+      fullStringResult = 'PAPER';
       break;
     case 's':
-      result = 'SCISSORS';
+      fullStringResult = 'SCISSORS';
       break;
     case 'sp':
-      result = 'SPOCK';
+      fullStringResult = 'SPOCK';
       break;
     case 'l':
-      result = 'LIZARD';
+      fullStringResult = 'LIZARD';
       break;
   }
-  return result;
+  return fullStringResult;
 }
 
-//get comp shot
 function getComputerShot () {
   let compRandomNumber = Math.floor(Math.random() * possibleShots.length);
-  let computerShot = possibleShots[compRandomNumber].toLowerCase();
+  let computerShot = possibleShots[compRandomNumber];
   return computerShot;
 }
 
-
 function determineRoundWinner() {
-  let human = getHumanShot();
-  console.log('HumanShot:' + human);
   let roundWinner;
-  console.log(`human: ${human}`);
-  console.log('wins: ' + WINS[human]);
-  let computer = getComputerShot().toUpperCase();
-  console.log('Computer Shot: ' + computer);
+  let human = verifyHumanShot();
+  console.log('\nYou choose: ' + human);
+  let computer = getComputerShot();
+  console.log('The computer shot: ' + computer);
   if (human === computer) {
-    return prompt('Tie');
+    roundWinner = '\nIt\'s a tie';
+  } else if (WINS[human].includes(computer)) {
+    roundWinner = '\nYou won!';
+  } else {
+    roundWinner = '\nComputer wins!';
   }
-  let keyWins = Object.keys(WINS);
-  keyWins.forEach(function(index) {
-    if (index === human && keyWins[index] === computer) {
-      roundWinner = 'You won!';
-    } else {
-      roundWinner = 'Computer wins!';
-    }
-  });
   prompt(roundWinner);
+  incrementScore(roundWinner);
   return roundWinner;
 }
 
-// function updateGamesToPlay() {
-//   let numberGamesLeft = howManyGamesToPlay();
-//   numberGamesLeft -= 1;
-//   console.log("num games left:" + numberGamesLeft);
-//   return numberGamesLeft > -1;
-// }
+function incrementScore(winner) {
+  switch (winner) {
+    case '\nYou won!':
+      score.human += 1;
+      score.total += 1;
+      break;
+    case '\nComputer wins!':
+      score.computer += 1;
+      score.total += 1;
+      break;
+    default:
+      score.total += 1;
+  }
+  console.log(`\n*********** Current Score --- You: ${score.human} ` +
+    `Computer: ${score.computer} Game #: ${score.total}/${score.games} *************\n`);
+}
+
+function displayFinalWinner(obj) {
+  let humanWon = `You Won! ${obj.human} to ${obj.computer}`;
+  let computerWon = `Computer Won! ${obj.human} to ${obj.computer}`;
+  let tie = `It's a tie! ${obj.human} to ${obj.computer}`;
+  if (obj.human > obj.computer) {
+    console.log(`+-${'-'.repeat(humanWon.length)}-+`);
+    console.log(`| ${' '.repeat(humanWon.length)} |`);
+    console.log(`|    GAME OVER    |`);
+    console.log(`| ${humanWon} |`);
+    console.log(`| ${' '.repeat(humanWon.length)} |`);
+    console.log(`+-${'-'.repeat(humanWon.length)}-+`);
+  } else if (obj.human < obj.computer) {
+    console.log(`+-${'-'.repeat(computerWon.length)}-+`);
+    console.log(`| ${' '.repeat(computerWon.length)} |`);
+    console.log(`|      GAME OVER       |`);
+    console.log(`| ${computerWon} |`);
+    console.log(`| ${' '.repeat(computerWon.length)} |`);
+    console.log(`+-${'-'.repeat(computerWon.length)}-+`);
+  } else {
+    console.log(`+-${'-'.repeat(tie.length)}-+`);
+    console.log(`| ${' '.repeat(tie.length)} |`);
+    console.log(`|      GAME OVER     |`);
+    console.log(`| ${tie} |`);
+    console.log(`| ${' '.repeat(tie.length)} |`);
+    console.log(`+-${'-'.repeat(tie.length)}-+`);
+  }
+}
+
+function resetScore(score) {
+  score.human = 0;
+  score.computer = 0;
+  score.total = 0;
+  score.games = 0;
+}
 
 
-function checkGamesLeft() {
-  let counter = howManyGamesToPlay();
-  for(let i = 0; i <= counter; i++) {
-    console.log(`i: ${i} & counter: ${counter}`);
-    if (i <= counter) {
-      return true;
-    } else {
+while (true) {
+  if (score.total === 0) {
+    howManyGamesToPlay();
+  }
+  determineRoundWinner();
+  if (score.games <= score.total) {
+    displayFinalWinner(score);
+    resetScore(score);
+    while (doYouWantToPlayAgain()) {
+      howManyGamesToPlay();
+      determineRoundWinner();
+      if (score.games <= score.total) {
+        displayFinalWinner(score);
+        resetScore(score);
+      }
       break;
     }
-}
-}
-
-while (checkGamesLeft()) {
-  let gameScore = [0,0];
-  if (determineRoundWinner() === 'Tie') {
-    continue;
-  } else if (determineRoundWinner()) {
-    prompt('You won!');
-    gameScore = [0,0];
-    gameScore[0] += 1;
-  } else {
-    gameScore[1] += 1;
-    prompt('Computer wins!');
-  }; 
+  }
 }
