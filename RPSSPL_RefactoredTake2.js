@@ -18,11 +18,11 @@ function getValueFromPrompt (value) {
 
 prompt('\n=>Welcome to Rock, Paper, Scissors, Spock, Lizard\n');
 prompt('\n=>Here are the rules:  \nEnter "r" for rock, \n"p" for paper,' +
-'\n"s" for scissors, \n"sp" for spock, \n"l" for lizard.\n');
+  '\n"s" for scissors, \n"sp" for spock, \n"l" for lizard.\n');
 
 function howManyGamesToPlay() {
   score.games = Number(getValueFromPrompt(`=>Please enter the number of ` +
-  `games you'd like to play (Select a number between 1 & 10): `));
+    `games you'd like to play (Select a number between 1 & 10): `));
   while (![1,2,3,4,5,6,7,8,9,10].includes(score.games)) {
     score.games = Number(getValueFromPrompt(`\n=>Hmm that didn't register.  Please enter 1-10: `));
   }
@@ -43,7 +43,7 @@ function doYouWantToPlayAgain() {
 
 function verifyHumanShot() {
   let result = getValueFromPrompt('Readyyy, Rock, Paper,' +
-  ' Scissors, Spock, Lizard...Shoot!');
+    ' Scissors, Spock, Lizard...Shoot!');
   while (!validHumanShots.includes(result)) {
     result = getValueFromPrompt('Hmm response didn\'t work. ' +
       'Please shoot again, choosing either "r", "p", "s", "sp", "or" "l": ');
