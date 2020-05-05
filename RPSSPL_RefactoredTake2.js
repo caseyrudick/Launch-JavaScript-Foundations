@@ -24,7 +24,8 @@ function howManyGamesToPlay() {
   score.games = Number(getValueFromPrompt(`=>Please enter the number of ` +
     `games you'd like to play (Select a number between 1 & 10): `));
   while (![1,2,3,4,5,6,7,8,9,10].includes(score.games)) {
-    score.games = Number(getValueFromPrompt(`\n=>Hmm that didn't register.  Please enter 1-10: `));
+    score.games = Number(getValueFromPrompt(`\n=>Hmm that didn't register. ` +
+    `Please enter 1-10: `));
   }
   return score;
 }
@@ -32,7 +33,8 @@ function howManyGamesToPlay() {
 function doYouWantToPlayAgain() {
   let playAgain = getValueFromPrompt(`\n=>Do you want to play again?`);
   while (!['y','Y','n','N'].includes(playAgain)) {
-    playAgain = getValueFromPrompt(`\n=>Hmm that didn't register.  Please enter y/n: `);
+    playAgain = getValueFromPrompt(`\n=>Hmm that didn't register.` +
+    `  Please enter y/n: `);
   }
   if (playAgain === 'y') {
     return true;
@@ -111,7 +113,8 @@ function incrementScore(winner) {
       score.total += 1;
   }
   console.log(`\n*********** Current Score --- You: ${score.human} ` +
-    `Computer: ${score.computer} Game #: ${score.total}/${score.games} *************\n`);
+    `Computer: ${score.computer} Game #: ${score.total}/
+    ${score.games} *************\n`);
 }
 
 function displayFinalWinner(obj) {
