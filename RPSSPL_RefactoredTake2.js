@@ -113,8 +113,8 @@ function incrementScore(winner) {
       score.total += 1;
   }
   console.log(`\n*********** Current Score --- You: ${score.human} ` +
-    `Computer: ${score.computer} Game #: ${score.total}/
-    ${score.games} *************\n`);
+    `Computer: ${score.computer} Game #: ${score.total}/` +
+    `${score.games} *************\n`);
 }
 
 function displayFinalWinner(obj) {
